@@ -14,8 +14,11 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::middleware('auth.basic')->get('/', function() {
-    return response()->json('hello');
+Route::middleware(['auth.basic'])->group(function () {
+    Route::get('/', function() {
+        return response()->json('hello');
+    });
+    Route::resource('products', ProductController::class);
 });
 
-Route::resource('products', ProductController::class);
+
