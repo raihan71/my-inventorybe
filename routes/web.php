@@ -17,6 +17,10 @@ Route::middleware(['auth.basic'])->group(function () {
     Route::get('/', function() {
         return response()->json('hello');
     });
-    Route::resource('products', ProductController::class);
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::post('/product', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/product/edit/{id}', [ProductController::class, 'show'])->name('products.show');
+    Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 });
 
